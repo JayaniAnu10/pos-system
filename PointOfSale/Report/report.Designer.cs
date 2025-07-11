@@ -47,7 +47,7 @@ namespace PointOfSale.Report
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartEmpSales = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dataGridViewRevenue = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.DownloadBtn = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -166,25 +166,25 @@ namespace PointOfSale.Report
             this.dataGridViewRevenue.Size = new System.Drawing.Size(944, 116);
             this.dataGridViewRevenue.TabIndex = 5;
             // 
-            // button1
+            // DownloadBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(1096, 572);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 43);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Download Report\r\n";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.DownloadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
+            this.DownloadBtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DownloadBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.DownloadBtn.Location = new System.Drawing.Point(1096, 572);
+            this.DownloadBtn.Name = "DownloadBtn";
+            this.DownloadBtn.Size = new System.Drawing.Size(161, 43);
+            this.DownloadBtn.TabIndex = 6;
+            this.DownloadBtn.Text = "Download Report\r\n";
+            this.DownloadBtn.UseVisualStyleBackColor = false;
+            this.DownloadBtn.Click += new System.EventHandler(this.DownloadBtn_Click);
             // 
             // report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 675);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DownloadBtn);
             this.Controls.Add(this.dataGridViewRevenue);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
@@ -216,6 +216,6 @@ namespace PointOfSale.Report
         private System.Windows.Forms.DataVisualization.Charting.Chart chartEmpSales;
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.DataGridView dataGridViewRevenue;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DownloadBtn;
     }
 }

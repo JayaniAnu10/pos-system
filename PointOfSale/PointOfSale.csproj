@@ -63,6 +63,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ExportPdf.cs" />
+    <Compile Include="Report\IReportGenerator.cs" />
     <Compile Include="Report\report.cs">
       <SubType>Form</SubType>
     </Compile>

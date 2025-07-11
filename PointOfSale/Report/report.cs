@@ -245,10 +245,10 @@ namespace PointOfSale.Report
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void DownloadBtn_Click(object sender, EventArgs e)
         {
-            ExportPdf exportPdf = new ExportPdf();
-            exportPdf.exportFullReportToPDF(chart1,chartEmpSales,dataGridViewRevenue);
+            IReportGenerator exporter = new ExportPdfReportGenerator();
+            exporter.exportPdf(chart1, chartEmpSales, dataGridViewRevenue);
         }
     }
 }
