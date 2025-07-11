@@ -16,9 +16,9 @@ using Font = iTextSharp.text.Font;
 
 namespace PointOfSale.Report
 {
-    internal class ExportPdf
+    internal class ExportPdfReportGenerator:IReportGenerator
     {
-        public void exportFullReportToPDF(Chart chart1, Chart chartEmpSales, DataGridView dataGridViewRevenue)
+        public void exportPdf(Chart chart1, Chart chartEmpSales, DataGridView dataGridViewRevenue)
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filePath = Path.Combine(desktopPath, "FullReport.pdf");
