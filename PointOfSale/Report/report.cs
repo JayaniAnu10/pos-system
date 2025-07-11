@@ -244,5 +244,11 @@ namespace PointOfSale.Report
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExportPdf exportPdf = new ExportPdf();
+            exportPdf.exportFullReportToPDF(chart1,chartEmpSales,dataGridViewRevenue);
+        }
     }
 }
