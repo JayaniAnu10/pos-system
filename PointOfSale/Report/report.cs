@@ -26,6 +26,7 @@ namespace PointOfSale.Report
         {
             LoadYears();
             EmployeeSalesPieChart();
+            RevenueBreakdown();
         }
 
         private void LoadYears()
@@ -155,6 +156,89 @@ namespace PointOfSale.Report
                 chartEmpSales.Titles.Add("Sales by Employee");
             }
         }
+
+
+        private void RevenueBreakdown()
+        {
+         
+            DataTable originalTable = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = @"
+            SELECT 
+                p.ProductName,
+                ISNULL(SUM(o.Qty * p.SellingPrice), 0) AS TotalRevenue
+            FROM ProductTable p
+            LEFT JOIN Orders o ON p.ProductId = o.ProductId
+            GROUP BY p.ProductName
+            ORDER BY p.ProductName";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                adapter.Fill(originalTable);
+            }
+
+            decimal grandTotal = originalTable.AsEnumerable()
+                .Sum(row => row.Field<decimal>("TotalRevenue"));
+
+         
+            DataTable transposedTable = new DataTable();
+
+            
+            transposedTable.Columns.Add("Metric");
+
+           
+            foreach (DataRow row in originalTable.Rows)
+            {
+                string product = row["ProductName"].ToString();
+                transposedTable.Columns.Add(product);
+            }
+
+            // Revenue row
+            DataRow revenueRow = transposedTable.NewRow();
+            revenueRow["Metric"] = "Revenue";
+            foreach (DataRow row in originalTable.Rows)
+            {
+                string product = row["ProductName"].ToString();
+                decimal revenue = Convert.ToDecimal(row["TotalRevenue"]);
+                revenueRow[product] = revenue.ToString("N2");
+            }
+            transposedTable.Rows.Add(revenueRow);
+
+            // Percentage row
+            DataRow percentageRow = transposedTable.NewRow();
+            percentageRow["Metric"] = "Percentage";
+            foreach (DataRow row in originalTable.Rows)
+            {
+                string product = row["ProductName"].ToString();
+                decimal revenue = Convert.ToDecimal(row["TotalRevenue"]);
+                decimal percent = (grandTotal > 0) ? (revenue / grandTotal) * 100 : 0;
+                percentageRow[product] = percent.ToString("0.00") + " %";
+            }
+            transposedTable.Rows.Add(percentageRow);
+            dataGridViewRevenue.DataSource = transposedTable;
+            dataGridViewRevenue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            foreach (DataGridViewColumn column in dataGridViewRevenue.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+         
+            dataGridViewRevenue.DataSource = transposedTable;
+            dataGridViewRevenue.ReadOnly = true;
+            dataGridViewRevenue.AllowUserToAddRows = false;
+
+           
+            dataGridViewRevenue.ScrollBars = ScrollBars.Both;
+            dataGridViewRevenue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dataGridViewRevenue.AutoResizeColumns();
+            dataGridViewRevenue.AutoResizeRows();
+        }
+
+
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
