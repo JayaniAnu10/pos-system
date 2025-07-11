@@ -36,6 +36,8 @@ namespace PointOfSale.Report
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -45,6 +47,7 @@ namespace PointOfSale.Report
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartEmpSales = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dataGridViewRevenue = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -140,20 +143,48 @@ namespace PointOfSale.Report
             // 
             // dataGridViewRevenue
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRevenue.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewRevenue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewRevenue.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewRevenue.Location = new System.Drawing.Point(381, 421);
             this.dataGridViewRevenue.Name = "dataGridViewRevenue";
-            this.dataGridViewRevenue.Size = new System.Drawing.Size(926, 116);
+            this.dataGridViewRevenue.RowTemplate.Height = 28;
+            this.dataGridViewRevenue.Size = new System.Drawing.Size(944, 116);
             this.dataGridViewRevenue.TabIndex = 5;
-            dataGridViewRevenue.DefaultCellStyle.Font = new Font("Segoe UI", 10);
-            dataGridViewRevenue.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            dataGridViewRevenue.RowTemplate.Height = 28;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.Location = new System.Drawing.Point(1096, 572);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(161, 43);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Download Report\r\n";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 471);
+            this.ClientSize = new System.Drawing.Size(1370, 675);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewRevenue);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
@@ -185,5 +216,6 @@ namespace PointOfSale.Report
         private System.Windows.Forms.DataVisualization.Charting.Chart chartEmpSales;
         private System.Windows.Forms.ComboBox comboBoxYear;
         private System.Windows.Forms.DataGridView dataGridViewRevenue;
+        private System.Windows.Forms.Button button1;
     }
 }
