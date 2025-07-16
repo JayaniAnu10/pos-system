@@ -40,9 +40,7 @@ namespace pos_system.Production
                     txtProductName.Text = reader["ProductName"].ToString();
                     txtQuantity.Text = reader["Quantity"].ToString();
                     txtCostPrice.Text = reader["CostPrice"].ToString();
-                    lblSellingPrice.Text = reader["SellingPrice"].ToString();
-                    lblDescription.Text = reader["Description"].ToString();
-                    lblStatus.Text = reader["Status"].ToString();
+                   
                 }
                 else
                 {
@@ -55,5 +53,20 @@ namespace pos_system.Production
         {
 
         }
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            // Handle the event or leave it empty
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            // Handle the event or leave it empty
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            // Handle the event or leave it empty
+        }
+
     }
 }

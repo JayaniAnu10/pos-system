@@ -87,7 +87,7 @@
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(187, 63);
             this.txtQuantity.TabIndex = 7;
-            this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity);
+           // this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity);
            // this.txtProductId.TextChanged += new System.EventHandler(this.txtProductId_TextChanged);
             // 
             // label3
