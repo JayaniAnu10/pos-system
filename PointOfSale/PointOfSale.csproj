@@ -213,6 +213,10 @@
     <EmbeddedResource Include="Employee\EmployeeDetails.resx">
       <DependentUpon>EmployeeDetails.cs</DependentUpon>
     </EmbeddedResource>
+
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+
     <EmbeddedResource Include="Production\Add_product.resx">
       <DependentUpon>Add_product.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,6 +228,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Production\Update_product.resx">
       <DependentUpon>Update_product.cs</DependentUpon>
+
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
