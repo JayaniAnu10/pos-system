@@ -11,6 +11,18 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data.SqlTypes;
+using System.Drawing.Printing;
+using System.Security.Policy;
+using System.Diagnostics.Eventing.Reader;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 
 
@@ -20,11 +32,12 @@ namespace PointOfSale.Cashier
     {
 
 
-        
+
 
         public CashierMain()
         {
             InitializeComponent();
+
             if (!DesignMode)
             {
                 DGV_List1.CellClick += DGV_List1_CellClick;
@@ -38,7 +51,6 @@ namespace PointOfSale.Cashier
 
         private void LoadProductData(string searchText = "")
         {
-           
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
 
@@ -94,10 +106,10 @@ namespace PointOfSale.Cashier
             if (DesignMode) return;
             LoadProductData();
             ResetBill();
-           
- 
 
-            lbl_date.Text =DateTime.Now.ToLongDateString();
+
+
+            lbl_date.Text = DateTime.Now.ToLongDateString();
             lbl_time.Text = DateTime.Now.ToLongTimeString();
         }
         public void SetDiscount(decimal discount, decimal net)
@@ -120,7 +132,7 @@ namespace PointOfSale.Cashier
         {
             int Qty = int.Parse(lbl_qty.Text);
 
-            if (!string.IsNullOrWhiteSpace(txt_qty.Text)) 
+            if (!string.IsNullOrWhiteSpace(txt_qty.Text))
             {
                 Qty++;
 
@@ -143,7 +155,7 @@ namespace PointOfSale.Cashier
         {
             int Qty = int.Parse(lbl_qty.Text);
 
-            if (txt_qty != null && Qty >1 )
+            if (txt_qty != null && Qty > 1)
             {
                 Qty--;
 
@@ -188,14 +200,14 @@ namespace PointOfSale.Cashier
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = DGV_List1.Rows[e.RowIndex];
-                string productName = row.Cells[1].Value.ToString(); 
+                string productName = row.Cells[1].Value.ToString();
                 txt_qty.Text = productName;
             }
         }
 
         private void btn_buy_item_Click(object sender, EventArgs e)
         {
-            
+
             if (string.IsNullOrWhiteSpace(txt_total.Text))
             {
                 string productName = txt_qty.Text.Trim();
@@ -257,17 +269,18 @@ namespace PointOfSale.Cashier
             {
                 MessageBox.Show("Already bill is calculated", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        
+
 
 
         }
 
         private void txt_cash_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
         private void InsertOrderItems(int billNo)
         {
+
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -293,18 +306,21 @@ namespace PointOfSale.Cashier
                         }
                     }
 
-                    
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error inserting orders: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+
         }
 
         //inset sale value
         private void InsertSalesRecord(int billNo)
         {
+
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
 
             try
@@ -345,13 +361,13 @@ namespace PointOfSale.Cashier
                         cmd.Parameters.AddWithValue("@BillNo", billNo);
                         cmd.Parameters.AddWithValue("@EmployeeId", employeeId);
                         cmd.Parameters.AddWithValue("@Total", total);
-                      
+
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
-                           
+
                         }
                         else
                         {
@@ -364,10 +380,16 @@ namespace PointOfSale.Cashier
             {
                 MessageBox.Show("Error inserting Sales: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+
         }
+
+
 
         private void updateQty()
         {
+
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
 
             try
@@ -399,38 +421,46 @@ namespace PointOfSale.Cashier
                         }
                     }
 
-                   
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error updating product quantities:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
         private void btn_done_Click(object sender, EventArgs e)
         {
             if (DGV_List2.Rows.Count == 0)
             {
                 MessageBox.Show("No items have been purchased.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txt_total.Text = "";
+                txt_net.Text = "";
                 return;
             }
 
             decimal totalAmount = 0;
             foreach (DataGridViewRow row in DGV_List2.Rows)
             {
-                if (!row.IsNewRow && row.Cells["Amount"].Value != null )
+                if (!row.IsNewRow && row.Cells["Amount"].Value != null)
                 {
                     if (decimal.TryParse(row.Cells["Amount"].Value.ToString(), out decimal amount))
                     {
                         totalAmount += amount;
                     }
                 }
+
+
             }
 
             updateQty();
 
+
             txt_total.Text = totalAmount.ToString("0.00");
             txt_net.Text = totalAmount.ToString("0.00");
+
+
 
             if (int.TryParse(lbl_bill.Text, out int billNo))
             {
@@ -441,18 +471,20 @@ namespace PointOfSale.Cashier
             {
                 MessageBox.Show("Invalid Bill Number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
         }
 
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_lo_Click(object sender, EventArgs e)
         {
 
-            if(!string.IsNullOrWhiteSpace(txt_total.Text))
+            if (!string.IsNullOrWhiteSpace(txt_total.Text))
             {
                 decimal total = Convert.ToDecimal(txt_total.Text);
-                CashierAddLoyality loyaltyForm = new CashierAddLoyality(this,total);
+                CashierAddLoyality loyaltyForm = new CashierAddLoyality(this, total);
                 loyaltyForm.Show();
             }
 
@@ -460,11 +492,11 @@ namespace PointOfSale.Cashier
             {
                 MessageBox.Show("purchase is not completed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+
         }
         private void ClearFormFields()
         {
-           
+
             txt_qty.Text = "";
             txt_total.Text = "";
             txt_net.Text = "";
@@ -474,7 +506,7 @@ namespace PointOfSale.Cashier
 
             lbl_qty.Text = "1";
 
-          
+
             DGV_List2.Rows.Clear();
 
             lbl_date.Text = DateTime.Now.ToLongDateString();
@@ -508,18 +540,25 @@ namespace PointOfSale.Cashier
                 MessageBox.Show("Error generating new BillNo:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-       
+        //try to print bill////////////////////////
+
+
         private void ptn_print_Click(object sender, EventArgs e)
+
         {
+
+
             if (!string.IsNullOrWhiteSpace(txt_balance.Text))
             {
 
-                ResetBill();
 
+                // Check if salesData is not empty
 
+                GenerateInvoicePdf();
+
+                ResetBill();  // Assuming you want to reset after printing
 
             }
-
             else
             {
                 MessageBox.Show("Bill is not completed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -567,15 +606,110 @@ namespace PointOfSale.Cashier
                     DGV_List2.Rows.RemoveAt(e.RowIndex);
                 }
             }
+
+
         }
-            private void DGV_List2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        private void DGV_List2_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
+        private void DGV_List1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txt_net_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GenerateInvoicePdf()
+        {
+            // Create the PDF document object (PageSize.A4 is commonly used)
+            iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A5);
+
+            try
+            {
+                // Get the Desktop path where you want to save the PDF
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string filePath = Path.Combine(desktopPath, "Invoice_" + lbl_bill.Text + ".pdf");
+
+                // Create PdfWriter instance to write the PDF file
+                iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+
+                // Open the document for writing
+                doc.Open();
+
+                // Add Title (Invoice heading)
+                doc.Add(new iTextSharp.text.Paragraph("                                                       INVOICE                                                  "));
+                
+                doc.Add(new iTextSharp.text.Paragraph("--------------------------------------------------------------------------------------------------------"));
+                doc.Add(new iTextSharp.text.Paragraph("Bill No: " + lbl_bill.Text));
+                // Add Bill Number, Date, and Time
+                doc.Add(new iTextSharp.text.Paragraph("Cashier: " + lbl_user.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Date: " + lbl_date.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Time: " + lbl_time.Text));
+                doc.Add(new iTextSharp.text.Paragraph("             "));
+                doc.Add(new iTextSharp.text.Paragraph("             "));
+                // Create a table to list the purchased items (5 columns)
+                PdfPTable table = new PdfPTable(5);  // 5 columns: No, Product Code, Product Name, Qty, Amount
+
+                // Add Table headers
+                table.AddCell("No");
+                table.AddCell("Product Code");
+                table.AddCell("Product Name");
+                table.AddCell("Quantity");
+                table.AddCell("Amount");
+
+                // Loop through each row in the DGV_List2 (purchase items) and add them to the table
+                int rowNo = 1;
+                foreach (DataGridViewRow row in DGV_List2.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    // Add the item details (No, Code, Name, Qty, Amount)
+                    table.AddCell(rowNo.ToString());
+                    table.AddCell(row.Cells["Code"].Value.ToString());
+                    table.AddCell(row.Cells["Product"].Value.ToString());
+                    table.AddCell(row.Cells["Qty"].Value.ToString());
+                    table.AddCell(row.Cells["Amount"].Value.ToString());
+
+                    rowNo++;
+                }
+
+                // Add the table to the document
+                doc.Add(table);
+
+                // Add Total, Discount, Net values
+                doc.Add(new iTextSharp.text.Paragraph("--------------------------------------------------------------------------------------------------------"));
+                doc.Add(new iTextSharp.text.Paragraph("Total: " + txt_total.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Discount: " + txt_discount.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Net: " + txt_net.Text));
+                doc.Add(new iTextSharp.text.Paragraph("--------------------------------------------------------------------------------------------------------"));
+
+                // Add Cash and Balance information
+                doc.Add(new iTextSharp.text.Paragraph("Cash: " + txt_cash.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Balance: " + txt_balance.Text));
+                doc.Add(new iTextSharp.text.Paragraph(" "));
+                doc.Add(new iTextSharp.text.Paragraph("                                          THANK YOU! COME AGAIN                                                "));
+
+
+                // Close the document after adding all content
+                doc.Close();
+
+                // Notify the user
+                MessageBox.Show("Invoice PDF is generated on Desktop!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions that occur during PDF generation
+                MessageBox.Show("Error generating invoice PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
     }
-
-
 }
+
+    
 

@@ -123,7 +123,7 @@
   <metadata name="Code.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Product.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Cost.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -142,7 +142,7 @@
   <data name="btnDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAAJdJREFUSEvlj7ENg0AQBCkPsr+riJC6jNzIu4qDAOQMjbXSkuKRJrud1w/DX1AR
+        DAAACwwBP0AiyAAAAJdJREFUSEvlj7ENg0AQBCkPsr+riJC6jNzIu4qDAOQMjbXSkuKRJrud1w/DX1AR
         85Z5XK3MhXcWFfFmzLUyV/Z++B5x6FoRL/YeCr/uyo6EQ1d2JBy6siPh0JUdCYeu7Eg4dGVHwqErOxIO
         XdmRcOjKjoRDV3YkHLqyI+HQlR0Jh67sSLbMD8eGnR3J3tp085G+R4zsPIMTZYKEY9T55k0AAAAASUVO
         RK5CYII=
@@ -151,13 +151,13 @@
   <data name="btn_min.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAABdJREFUOE9jYBgFwwX8JxOgmzMKRi4AAG48N8kKcHfpAAAAAElFTkSuQmCC
+        DAAACwwBP0AiyAAAABdJREFUOE9jYBgFwwX8JxOgmzMKRi4AAG48N8kKcHfpAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btn_plus.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAACxJREFUOE9jYKAl+P///390MZLAqAEkGABSSCpANwMrIFohLjBqABUMoAsAANIP
+        DAAACwwBP0AiyAAAACxJREFUOE9jYKAl+P///390MZLAqAEkGABSSCpANwMrIFohLjBqABUMoAsAANIP
         Y500j/w2AAAAAElFTkSuQmCC
 </value>
   </data>
