@@ -26,5 +26,7 @@ namespace PointOfSale.Properties
                 return defaultInstance;
             }
         }
+
+        public string POSConnectionString { get; internal set; }
     }
 }
