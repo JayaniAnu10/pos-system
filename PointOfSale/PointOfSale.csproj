@@ -136,6 +136,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cashier\CalculateTotalCommand.cs" />
     <Compile Include="Cashier\CashierAddLoyality.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +155,12 @@
     <Compile Include="Cashier\CashierMain.Designer.cs">
       <DependentUpon>CashierMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cashier\CommandInvoker.cs" />
+    <Compile Include="Cashier\ICommand.cs" />
+    <Compile Include="Cashier\ICommandWithBillNo.cs" />
+    <Compile Include="Cashier\InsertOrderItemsCommand.cs" />
+    <Compile Include="Cashier\InsertSalesRecordCommand.cs" />
+    <Compile Include="Cashier\UpdateQtyCommand.cs" />
     <Compile Include="Employee\EmployeeDetails.cs">
       <SubType>Form</SubType>
     </Compile>
