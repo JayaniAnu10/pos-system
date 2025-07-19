@@ -86,7 +86,7 @@ namespace PointOfSale
                         }
                         else if (role == "cashier")
                         {
-                            CashierMain cf = new CashierMain();
+                            CashierMain cf = new CashierMain(EmployeeUserName); //edit by parindya to get username to cashiermain
                              cf.Show();
                         }
                     }
