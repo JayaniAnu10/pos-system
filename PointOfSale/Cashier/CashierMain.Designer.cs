@@ -737,7 +737,7 @@
             this.lbl_user.Size = new System.Drawing.Size(49, 24);
             this.lbl_user.TabIndex = 5;
             this.lbl_user.Text = "pariii";
-            // 
+          //
             // CashierMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -818,4 +818,3 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewImageColumn btnDelete;
     }
-}

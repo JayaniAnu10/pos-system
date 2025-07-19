@@ -386,7 +386,7 @@ namespace PointOfSale.Cashier
 
 
 
-        public void updateQty()
+         public void updateQty()
         {
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -715,10 +715,10 @@ namespace PointOfSale.Cashier
             }
         }*/
 
-        private void GenerateInvoicePdf()
+   private void GenerateInvoicePdf()
         {
             // Create the PDF document object (PageSize.A4 is commonly used)
-            iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A4);
+            iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A5);
 
             try
             {
@@ -737,13 +737,13 @@ namespace PointOfSale.Cashier
                 doc.Add(new iTextSharp.text.Paragraph("---------------------------------------------------------------------------------------"));
                 doc.Add(new iTextSharp.text.Paragraph("Bill No: " + lbl_bill.Text));
 
+
                 // Add Bill Number, Date, and Time
                 doc.Add(new iTextSharp.text.Paragraph("Cashier: " + lbl_user.Text));
                 doc.Add(new iTextSharp.text.Paragraph("Date: " + lbl_date.Text));
                 doc.Add(new iTextSharp.text.Paragraph("Time: " + lbl_time.Text));
                 doc.Add(new iTextSharp.text.Paragraph("             "));
                 doc.Add(new iTextSharp.text.Paragraph("             "));
-
                 // Create a table to list the purchased items (5 columns)
                 PdfPTable table = new PdfPTable(5);  // 5 columns: No, Product Code, Product Name, Qty, Amount
 
@@ -756,7 +756,7 @@ namespace PointOfSale.Cashier
                 table.AddCell(new PdfPCell(new Phrase("Product Name")) { Border = PdfPCell.NO_BORDER });
                 table.AddCell(new PdfPCell(new Phrase("Quantity")) { Border = PdfPCell.NO_BORDER });
                 table.AddCell(new PdfPCell(new Phrase("Amount")) { Border = PdfPCell.NO_BORDER });
-
+ 
                 // Loop through each row in the DGV_List2 (purchase items) and add them to the table
                 int rowNo = 1;
                 foreach (DataGridViewRow row in DGV_List2.Rows)
@@ -776,7 +776,7 @@ namespace PointOfSale.Cashier
                         HorizontalAlignment = Element.ALIGN_RIGHT  // Right-align the amount
                     });
 
-                    rowNo++;
+                     rowNo++;
                 }
 
                 // Add the table to the document
@@ -822,8 +822,10 @@ namespace PointOfSale.Cashier
             }
 
 
-        }
+         }
     }
 }
+    
+
     
 
