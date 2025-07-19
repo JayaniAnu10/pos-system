@@ -334,12 +334,12 @@ namespace PointOfSale.Cashier
                     decimal discount = 0;
 
                     // Get the EmployeeId based on employee name
-                    string getEmpIdQuery = "SELECT EmployeeId FROM EmployeeTable WHERE EmployeeName = @EmployeeName";
+                    string getEmpIdQuery = "SELECT EmployeeId FROM EmployeeTable WHERE EmployeeUserName = @EmployeeUserName";
                     string employeeId = "";
 
                     using (SqlCommand cmdEmp = new SqlCommand(getEmpIdQuery, conn))
                     {
-                        cmdEmp.Parameters.AddWithValue("@EmployeeName", employeeName);
+                        cmdEmp.Parameters.AddWithValue("@EmployeeUserName", employeeName);
                         object result = cmdEmp.ExecuteScalar();
                         if (result != null)
                         {
@@ -824,6 +824,12 @@ namespace PointOfSale.Cashier
 
 
          }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Form1 login = new Form1();
+            login.Show();
+        }
     }
 }
     
