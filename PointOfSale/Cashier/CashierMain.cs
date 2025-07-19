@@ -33,9 +33,10 @@ namespace PointOfSale.Cashier
 
 
 
-        public CashierMain()
+        public CashierMain(string username)
         {
             InitializeComponent();
+            lbl_user.Text = username;
 
             if (!DesignMode)
             {

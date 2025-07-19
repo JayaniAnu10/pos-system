@@ -223,8 +223,10 @@
 
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+	</EmbeddedResource>
 
-    <EmbeddedResource Include="Production\Add_product.resx">
+
+		<EmbeddedResource Include="Production\Add_product.resx">
       <DependentUpon>Add_product.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\Dash_Production.resx">
