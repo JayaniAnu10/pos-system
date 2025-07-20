@@ -438,7 +438,7 @@ namespace PointOfSale.Employee
                 emailtxt.Text = row.Cells[5].Value?.ToString();  // EmployeeEmail
                 jobtxt.Text = row.Cells[6].Value?.ToString();  // EmployeeRole
                 gendertxt.Text = row.Cells[7].Value?.ToString();  // EmployeeGender
-                salarytxt.Text = row.Cells[11].Value?.ToString();
+                salarytxt.Text = row.Cells[8].Value?.ToString();
                 
                 // EmployeeSalary
                 usernametxt.Text = row.Cells[9].Value?.ToString();  // EmployeeUserName
