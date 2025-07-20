@@ -1,4 +1,4 @@
-﻿namespace pos_system.Production
+﻿namespace PointOfSale.Production
 {
     partial class Dash_Production
     {

@@ -3,9 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using Org.BouncyCastle.Asn1.Cmp;
 
-namespace pos_system.Production
+namespace PointOfSale.Production
 {
     public partial class ProductView : Form
     {
@@ -15,7 +14,10 @@ namespace pos_system.Production
         {
             InitializeComponent();
             _productId = productId;
+            this.Load += new EventHandler(ProductView_Load);
         }
+
+       
 
         private void ProductView_Load(object sender, EventArgs e)
         {
@@ -36,37 +38,32 @@ namespace pos_system.Production
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                   txtProductId.Text = reader["ProductId"].ToString();
+                    txtProductId.Text = reader["ProductId"].ToString();
                     txtProductName.Text = reader["ProductName"].ToString();
                     txtQuantity.Text = reader["Quantity"].ToString();
                     txtCostPrice.Text = reader["CostPrice"].ToString();
-                   
+                    txtSellingPrice.Text = reader["SellingPrice"].ToString(); // Add if not yet displayed
+                    txtDescription.Text = reader["Description"].ToString();
+
+                    txtProductId.ReadOnly = true;
+                    txtProductName.ReadOnly = true;
+                    txtQuantity.ReadOnly = true;
+                    txtCostPrice.ReadOnly = true;
+                    txtSellingPrice.ReadOnly = true;
+                    txtDescription.ReadOnly = true;
+                    // Add if needed
                 }
                 else
                 {
                     MessageBox.Show("Product not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            // Handle the event or leave it empty
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            // Handle the event or leave it empty
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            // Handle the event or leave it empty
         }
 
     }
 }
+
+        
+    
+
