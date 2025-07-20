@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Drawing.Imaging;
+using PointOfSale.Report;
 
 
 namespace PointOfSale.Employee
@@ -449,6 +450,33 @@ namespace PointOfSale.Employee
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            report reportForm = new report();
+            reportForm.Show();
+            this.Hide(); // hide current form
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            EmployeeDetails employeeForm = new EmployeeDetails();
+            employeeForm.Show();
+            this.Hide(); // hide current form
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

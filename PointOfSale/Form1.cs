@@ -1,5 +1,6 @@
 ﻿using PointOfSale.Cashier;
 using PointOfSale.Employee;
+using PointOfSale.Production;
 using PointOfSale.Report;
 using System;
 using System.Collections.Generic;
@@ -76,8 +77,8 @@ namespace PointOfSale
 
                         if (role == "admin")
                         {
-                            // AdminForm af = new AdminForm();
-                            // af.Show();
+                            Dash_Production af = new Dash_Production();
+                             af.Show();
                         }
                         else if (role == "manager")
                         {
@@ -100,6 +101,11 @@ namespace PointOfSale
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -271,6 +271,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\mysql.sql" />
+    <None Include="resources\shopmart-removebg-preview1.png" />
+    <None Include="resources\shopmart-removebg-preview.png" />
+    <None Include="resources\shopmart1.jpg" />
+    <None Include="resources\shopmart.jpg" />
     <None Include="resources\maleuser_customer_person_usuari_9884.png" />
     <None Include="resources\users_icon-icons.com_57999.png" />
   </ItemGroup>
