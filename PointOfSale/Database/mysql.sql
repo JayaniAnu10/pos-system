@@ -88,3 +88,21 @@ INSERT INTO ProductTable (ProductId, ProductName, Quantity, CostPrice, SellingPr
 ('P9', 'Prima Kottu Mee Koream Ramen Seafood 116G', 28, 280.00, 300.00, 'Sizes :- 70g, 85g, 116g|Categories :- Noodles And Pastas', 'Available','pos system\resources\Koream Ramen.jpg');
 
 GO
+
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(50) NOT NULL,
+    Role VARCHAR(20) NOT NULL
+);
+
+INSERT INTO Users (Username, Password, Role)
+VALUES 
+('Dilhara', 'dilhara123', 'admin'),
+('Sajini', 'sajini123', 'admin'),
+('Dasuni', 'dasuni123', 'manager'),
+('Parindya', 'parindya123', 'cashier'),
+('Anuththara', 'anuththara123', 'cashier'),
+('Menaka', 'menaka123', 'cashier');
+
+go
