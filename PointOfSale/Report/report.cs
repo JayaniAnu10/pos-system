@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PointOfSale.Employee;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -249,6 +250,25 @@ namespace PointOfSale.Report
         {
             IReportGenerator exporter = new ExportPdfReportGenerator();
             exporter.exportPdf(chart1, chartEmpSales, dataGridViewRevenue);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            EmployeeDetails employeeForm = new EmployeeDetails();
+            employeeForm.Show();
+            this.Hide(); // hide current form
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Application.Exit(); // close entire app
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            report reportForm = new report();
+            reportForm.Show();
+            this.Hide(); // hide current form
         }
     }
 }
