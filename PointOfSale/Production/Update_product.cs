@@ -147,6 +147,11 @@ namespace PointOfSale.Production
             // You can write your logic here
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Close();
+
+        }
     }
 }
 

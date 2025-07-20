@@ -213,6 +213,12 @@
     <EmbeddedResource Include="Employee\EmployeeDetails.resx">
       <DependentUpon>EmployeeDetails.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< Updated upstream
+=======
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> Stashed changes
     <EmbeddedResource Include="Production\Add_product.resx">
       <DependentUpon>Add_product.cs</DependentUpon>
     </EmbeddedResource>

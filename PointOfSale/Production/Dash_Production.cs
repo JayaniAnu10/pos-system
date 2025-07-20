@@ -40,16 +40,31 @@ namespace PointOfSale.Production
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
+                dataGridView1.DataSource = null;
+                dataGridView1.Columns.Clear();
                 dataGridView1.DataSource = dt;
-                dataGridView1.AutoGenerateColumns = true;
+
+                dataGridView1.DefaultCellStyle.SelectionBackColor = Color.LightGreen;
+
+                dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+                // Style and formatting
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                dataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+                dataGridView1.RowTemplate.Height = 30;
+                dataGridView1.ColumnHeadersHeight = 35;
+
                 dataGridView1.ReadOnly = true;
                 dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dataGridView1.MultiSelect = false;
+                dataGridView1.RowHeadersVisible = false;
 
-                // Add buttons only once
-                if (!dataGridView1.Columns.Contains("DeleteButton"))
-                    AddActionButtons();
+                AddActionButtons(); // Add buttons after setting DataSource
             }
         }
+
 
         private void SearchProduct(string keyword)
         {
@@ -75,7 +90,7 @@ namespace PointOfSale.Production
         private void AddActionButtons()
         {
             // DELETE Button
-            DataGridViewButtonColumn deleteBtn = new DataGridViewButtonColumn
+            var deleteBtn = new DataGridViewButtonColumn
             {
                 Name = "DeleteButton",
                 HeaderText = "Delete",
@@ -85,7 +100,7 @@ namespace PointOfSale.Production
             dataGridView1.Columns.Add(deleteBtn);
 
             // UPDATE Button
-            DataGridViewButtonColumn updateBtn = new DataGridViewButtonColumn
+            var updateBtn = new DataGridViewButtonColumn
             {
                 Name = "UpdateButton",
                 HeaderText = "Update",
@@ -95,7 +110,7 @@ namespace PointOfSale.Production
             dataGridView1.Columns.Add(updateBtn);
 
             // DISPLAY Button
-            DataGridViewButtonColumn displayBtn = new DataGridViewButtonColumn
+            var displayBtn = new DataGridViewButtonColumn
             {
                 Name = "DisplayButton",
                 HeaderText = "Display",
@@ -103,7 +118,6 @@ namespace PointOfSale.Production
                 UseColumnTextForButtonValue = true
             };
             dataGridView1.Columns.Add(displayBtn);
-
         }
 
 
@@ -141,13 +155,59 @@ namespace PointOfSale.Production
 
         }
 
+        
+        private void btnAddButton_Click(object sender, EventArgs e)
+        {
+            // Create an instance of your Add Product form
+            Add_product addForm = new Add_product();
+
+            // Show the form as a modal dialog
+            addForm.ShowDialog();
+
+            // Reload the product list after the Add form is closed
+            LoadProductData();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = txtSearch.Text.Trim();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                SearchProduct(keyword);
+            }
+            else
+            {
+                LoadProductData(); // Reload everything if search is empty
+            }
+        }
+
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
+            // Safely get the column name
             DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
-            string productId = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString(); // Column 0 = ProductId
+
+            // Instead of using column name directly, use index check
+            if (!dataGridView1.Columns.Contains("ProductId") &&
+                     !dataGridView1.Columns.Cast<DataGridViewColumn>().Any(c => c.HeaderText == "ProductId"))
+            {
+                MessageBox.Show("ProductId column not found.");
+                return;
+            }
+
+
+            // Get ProductId value safely
+            object productIdObj = dataGridView1.Rows[e.RowIndex].Cells["ProductId"].Value;
+            if (productIdObj == null)
+            {
+                MessageBox.Show("Selected row has no ProductId value.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string productId = productIdObj.ToString();
 
             if (column.Name == "DeleteButton")
             {
@@ -175,9 +235,9 @@ namespace PointOfSale.Production
             {
                 try
                 {
-                    Update_product updateForm = new Update_product(productId); // Ensure this constructor exists in your Update_product form
-                    updateForm.ShowDialog(); // Open as a modal dialog
-                    LoadProductData(); // Refresh data after possible update
+                    Update_product updateForm = new Update_product(productId); // Ensure constructor exists
+                    updateForm.ShowDialog();
+                    LoadProductData();
                 }
                 catch (Exception ex)
                 {
@@ -188,41 +248,16 @@ namespace PointOfSale.Production
             {
                 try
                 {
-                    ProductView displayForm = new ProductView(productId); // Make sure constructor accepts productId
-                    displayForm.ShowDialog(); // Open the form as a modal dialog
+                    ProductView displayForm = new ProductView(productId);
+                    displayForm.ShowDialog();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error displaying product: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-        }
-        private void btnAddButton_Click(object sender, EventArgs e)
-        {
-            // Create an instance of your Add Product form
-            Add_product addForm = new Add_product();
-
-            // Show the form as a modal dialog
-            addForm.ShowDialog();
-
-            // Reload the product list after the Add form is closed
-            LoadProductData();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            string keyword = txtSearch.Text.Trim();
-
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                SearchProduct(keyword);
-            }
-            else
-            {
-                LoadProductData(); // Reload everything if search is empty
-            }
-        }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -233,6 +268,21 @@ namespace PointOfSale.Production
         {
             txtSearch.Text = "";     // Clear the search box
             LoadProductData();       // Reload all product data
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

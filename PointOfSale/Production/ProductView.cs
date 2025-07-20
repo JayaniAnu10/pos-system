@@ -17,7 +17,9 @@ namespace PointOfSale.Production
             this.Load += new EventHandler(ProductView_Load);
         }
 
-       
+        public ProductView()
+        {
+        }
 
         private void ProductView_Load(object sender, EventArgs e)
         {
