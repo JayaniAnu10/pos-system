@@ -1,4 +1,5 @@
-﻿using PointOfSale.Report;
+﻿using PointOfSale.Employee;
+using PointOfSale.Report;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace PointOfSale
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new EmployeeDetails());
         }
     }
 }

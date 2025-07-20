@@ -197,6 +197,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report\report.resx">
       <DependentUpon>report.cs</DependentUpon>
@@ -224,6 +225,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\mysql.sql" />
+    <None Include="resources\maleuser_customer_person_usuari_9884.png" />
+    <None Include="resources\users_icon-icons.com_57999.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Login\" />
