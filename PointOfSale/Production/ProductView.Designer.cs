@@ -1,4 +1,4 @@
-﻿namespace pos_system.Production
+﻿namespace PointOfSale.Production
 {
     partial class ProductView
     {
@@ -31,17 +31,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtProductId = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.txtSellingPrice = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
             this.txtCostPrice = new System.Windows.Forms.TextBox();
             this.txtProductName = new System.Windows.Forms.TextBox();
-            this.txtProductId = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtQuantity = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,93 +66,65 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
             this.panel2.Controls.Add(this.txtQuantity);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.txtCostPrice);
             this.panel2.Controls.Add(this.txtProductName);
+            this.panel2.Controls.Add(this.txtCostPrice);
+            this.panel2.Controls.Add(this.txtStatus);
+            this.panel2.Controls.Add(this.txtSellingPrice);
+            this.panel2.Controls.Add(this.txtDescription);
             this.panel2.Controls.Add(this.txtProductId);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(-7, 74);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(892, 649);
             this.panel2.TabIndex = 1;
             // 
-            // txtQuantity
+            // txtProductId
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(621, 462);
-            this.txtQuantity.Multiline = true;
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(187, 63);
-            this.txtQuantity.TabIndex = 7;
-           // this.txtQuantity.TextChanged += new System.EventHandler(this.txtQuantity);
-           // this.txtProductId.TextChanged += new System.EventHandler(this.txtProductId_TextChanged);
+            this.txtProductId.Location = new System.Drawing.Point(45, 53);
+            this.txtProductId.Name = "txtProductId";
+            this.txtProductId.Size = new System.Drawing.Size(100, 22);
+            this.txtProductId.TabIndex = 0;
             // 
-            // label3
+            // txtDescription
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(655, 421);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 20);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Quantity";
+            this.txtDescription.Location = new System.Drawing.Point(19, 382);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(100, 22);
+            this.txtDescription.TabIndex = 1;
             // 
-            // label2
+            // txtSellingPrice
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(35, 391);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 20);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Description";
+            this.txtSellingPrice.Location = new System.Drawing.Point(31, 324);
+            this.txtSellingPrice.Name = "txtSellingPrice";
+            this.txtSellingPrice.Size = new System.Drawing.Size(100, 22);
+            this.txtSellingPrice.TabIndex = 2;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(19, 466);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(100, 22);
+            this.txtStatus.TabIndex = 3;
             // 
             // txtCostPrice
             // 
-            this.txtCostPrice.Location = new System.Drawing.Point(390, 204);
-            this.txtCostPrice.Multiline = true;
+            this.txtCostPrice.Location = new System.Drawing.Point(31, 249);
             this.txtCostPrice.Name = "txtCostPrice";
-            this.txtCostPrice.Size = new System.Drawing.Size(184, 91);
+            this.txtCostPrice.Size = new System.Drawing.Size(100, 22);
             this.txtCostPrice.TabIndex = 4;
-            this.txtCostPrice.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // txtProductName
             // 
-            this.txtProductName.Location = new System.Drawing.Point(390, 138);
+            this.txtProductName.Location = new System.Drawing.Point(31, 110);
             this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Size = new System.Drawing.Size(149, 22);
-            this.txtProductName.TabIndex = 3;
+            this.txtProductName.Size = new System.Drawing.Size(100, 22);
+            this.txtProductName.TabIndex = 5;
             // 
-            // txtProductId
+            // txtQuantity
             // 
-            this.txtProductId.Location = new System.Drawing.Point(390, 24);
-            this.txtProductId.Multiline = true;
-            this.txtProductId.Name = "txtProductId";
-            this.txtProductId.ReadOnly = true;
-            this.txtProductId.Size = new System.Drawing.Size(474, 83);
-            this.txtProductId.TabIndex = 2;
-            this.txtProductId.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(28, 432);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(490, 119);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(28, 15);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(319, 346);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.txtQuantity.Location = new System.Drawing.Point(45, 184);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(100, 22);
+            this.txtQuantity.TabIndex = 6;
             // 
             // ProductView
             // 
@@ -170,7 +140,6 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -180,13 +149,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox txtProductId;
-        private System.Windows.Forms.TextBox txtCostPrice;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.TextBox txtProductName;
+        private System.Windows.Forms.TextBox txtCostPrice;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.TextBox txtSellingPrice;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.TextBox txtProductId;
     }
 }

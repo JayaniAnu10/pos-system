@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
-using pos_system.Production;
+using PointOfSale.Production;
 
 
 
 
-namespace pos_system.Production
+namespace PointOfSale.Production
 {
     public partial class Dash_Production : Form
     {
@@ -184,6 +184,19 @@ namespace pos_system.Production
                     MessageBox.Show("Error opening update form: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            else if (column.Name == "DisplayButton")
+            {
+                try
+                {
+                    ProductView displayForm = new ProductView(productId); // Make sure constructor accepts productId
+                    displayForm.ShowDialog(); // Open the form as a modal dialog
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error displaying product: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
         }
         private void btnAddButton_Click(object sender, EventArgs e)
         {

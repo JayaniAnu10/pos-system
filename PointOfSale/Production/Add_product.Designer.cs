@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace pos_system.Production
+namespace PointOfSale.Production
 {
     partial class Add_product
     {
@@ -43,10 +43,6 @@ namespace pos_system.Production
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
-            cmbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
-
-
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -196,6 +192,7 @@ namespace pos_system.Production
             // cmbStatus
             // 
             this.cmbStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
+            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Items.AddRange(new object[] {
@@ -271,7 +268,6 @@ namespace pos_system.Production
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(228)))), ((int)(((byte)(199)))));
             this.ClientSize = new System.Drawing.Size(725, 812);
-            this.ControlBox = false;
             this.Controls.Add(this.btnClearAll);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSave);
@@ -289,7 +285,7 @@ namespace pos_system.Production
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtProductId);
             this.Controls.Add(this.label2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Add_product";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Add_product_Load);

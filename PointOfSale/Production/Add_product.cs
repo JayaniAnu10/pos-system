@@ -11,7 +11,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 
 
-namespace pos_system.Production
+namespace PointOfSale.Production
 {
     public partial class Add_product : Form
 

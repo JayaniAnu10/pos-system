@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace pos_system.Production
+namespace PointOfSale.Production
 {
     public partial class Update_product : Form
     {
