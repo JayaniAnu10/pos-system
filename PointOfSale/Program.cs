@@ -1,4 +1,5 @@
-﻿using PointOfSale.Report;
+﻿using PointOfSale.Employee;
+using PointOfSale.Report;
 using System;
 using System.Collections.Generic;
 using System.Linq;

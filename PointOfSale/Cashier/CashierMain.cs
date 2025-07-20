@@ -33,10 +33,10 @@ namespace PointOfSale.Cashier
 
 
 
-        public CashierMain(string username)
+
+        public CashierMain()
         {
             InitializeComponent();
-            lbl_user.Text = username;
 
             if (!DesignMode)
             {
@@ -278,7 +278,7 @@ namespace PointOfSale.Cashier
         {
 
         }
-        public void InsertOrderItems(int billNo)
+        private void InsertOrderItems(int billNo)
         {
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -318,7 +318,7 @@ namespace PointOfSale.Cashier
         }
 
         //inset sale value
-        public void InsertSalesRecord(int billNo)
+        private void InsertSalesRecord(int billNo)
         {
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -334,12 +334,12 @@ namespace PointOfSale.Cashier
                     decimal discount = 0;
 
                     // Get the EmployeeId based on employee name
-                    string getEmpIdQuery = "SELECT EmployeeId FROM EmployeeTable WHERE EmployeeUserName = @EmployeeUserName";
+                    string getEmpIdQuery = "SELECT EmployeeId FROM EmployeeTable WHERE EmployeeName = @EmployeeName";
                     string employeeId = "";
 
                     using (SqlCommand cmdEmp = new SqlCommand(getEmpIdQuery, conn))
                     {
-                        cmdEmp.Parameters.AddWithValue("@EmployeeUserName", employeeName);
+                        cmdEmp.Parameters.AddWithValue("@EmployeeName", employeeName);
                         object result = cmdEmp.ExecuteScalar();
                         if (result != null)
                         {
@@ -387,7 +387,7 @@ namespace PointOfSale.Cashier
 
 
 
-         public void updateQty()
+        private void updateQty()
         {
 
             string connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
@@ -430,11 +430,8 @@ namespace PointOfSale.Cashier
             }
 
         }
-        //design pattern
-
         private void btn_done_Click(object sender, EventArgs e)
         {
-            // Check if there are any items in the DataGridView
             if (DGV_List2.Rows.Count == 0)
             {
                 MessageBox.Show("No items have been purchased.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -443,30 +440,39 @@ namespace PointOfSale.Cashier
                 return;
             }
 
-            // Create the invoker to execute commands
-            CommandInvoker invoker = new CommandInvoker();
+            decimal totalAmount = 0;
+            foreach (DataGridViewRow row in DGV_List2.Rows)
+            {
+                if (!row.IsNewRow && row.Cells["Amount"].Value != null)
+                {
+                    if (decimal.TryParse(row.Cells["Amount"].Value.ToString(), out decimal amount))
+                    {
+                        totalAmount += amount;
+                    }
+                }
 
-            // Add the command to calculate the total
-            invoker.AddCommand(new CalculateTotalCommand(DGV_List2, txt_total, txt_net));
 
-            // Add the command to update quantities
-            invoker.AddCommand(new UpdateQtyCommand(this)); // Pass `this` (CashierMain form)
+            }
 
-            // Check if the bill number is valid
+            updateQty();
+
+
+            txt_total.Text = totalAmount.ToString("0.00");
+            txt_net.Text = totalAmount.ToString("0.00");
+
+
+
             if (int.TryParse(lbl_bill.Text, out int billNo))
             {
-                // Add the commands to insert sales record and order items
-                invoker.AddCommand(new InsertSalesRecordCommand(this)); // Pass `this` (CashierMain form)
-                invoker.AddCommand(new InsertOrderItemsCommand(this)); // Pass `this` (CashierMain form)
-
-                // Execute all the commands with the bill number
-                invoker.ExecuteCommands(billNo);
+                InsertSalesRecord(billNo);  // 👉 pass the billNo to Sales
+                InsertOrderItems(billNo);   // 👉 same billNo to Orders
             }
             else
             {
                 MessageBox.Show("Invalid Bill Number", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
+
+
         }
 
         /// </summary>
@@ -618,10 +624,10 @@ namespace PointOfSale.Cashier
 
         }
 
-        /*private void GenerateInvoicePdf()
+        private void GenerateInvoicePdf()
         {
             // Create the PDF document object (PageSize.A4 is commonly used)
-            iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A4);
+            iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A5);
 
             try
             {
@@ -636,9 +642,9 @@ namespace PointOfSale.Cashier
                 doc.Open();
 
                 // Add Title (Invoice heading)
-                doc.Add(new iTextSharp.text.Paragraph("                                              INVOICE  "));
+                doc.Add(new iTextSharp.text.Paragraph("                                                       INVOICE                                                  "));
                 
-                doc.Add(new iTextSharp.text.Paragraph("---------------------------------------------------------------------------------------"));
+                doc.Add(new iTextSharp.text.Paragraph("--------------------------------------------------------------------------------------------------------"));
                 doc.Add(new iTextSharp.text.Paragraph("Bill No: " + lbl_bill.Text));
                 // Add Bill Number, Date, and Time
                 doc.Add(new iTextSharp.text.Paragraph("Cashier: " + lbl_user.Text));
@@ -676,31 +682,17 @@ namespace PointOfSale.Cashier
                 doc.Add(table);
 
                 // Add Total, Discount, Net values
-                doc.Add(new iTextSharp.text.Paragraph("---------------------------------------------------------------------------------------"));
-                doc.Add(new iTextSharp.text.Paragraph("Total:            " + txt_total.Text));
-                if (string.IsNullOrWhiteSpace(txt_discount.Text))
-                {
-                    doc.Add(new iTextSharp.text.Paragraph("Discount:         0.00 "));
-                }
-                else
-                {
-                    doc.Add(new iTextSharp.text.Paragraph("Discount:         " + txt_discount.Text));
-                }
-                doc.Add(new iTextSharp.text.Paragraph("Net:              " + txt_net.Text));
-                doc.Add(new iTextSharp.text.Paragraph("---------------------------------------------------------------------------------------"));
+                doc.Add(new iTextSharp.text.Paragraph("--------------------------------------------------------------------------------------------------------"));
+                doc.Add(new iTextSharp.text.Paragraph("Total: " + txt_total.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Discount: " + txt_discount.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Net: " + txt_net.Text));
+                doc.Add(new iTextSharp.text.Paragraph("--------------------------------------------------------------------------------------------------------"));
 
                 // Add Cash and Balance information
-                decimal cash = decimal.Parse(txt_cash.Text);
-
-                // Format the decimal to two decimal places
-                string formattedCash = cash.ToString("F2"); // "F2" ensures two decimal places
-
-                // Add the formatted value to the document
-                doc.Add(new iTextSharp.text.Paragraph("Cash:          " + formattedCash));
-                
-                doc.Add(new iTextSharp.text.Paragraph("Balance:       " + txt_balance.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Cash: " + txt_cash.Text));
+                doc.Add(new iTextSharp.text.Paragraph("Balance: " + txt_balance.Text));
                 doc.Add(new iTextSharp.text.Paragraph(" "));
-                doc.Add(new iTextSharp.text.Paragraph("                               THANK YOU! COME AGAIN  "));
+                doc.Add(new iTextSharp.text.Paragraph("                                          THANK YOU! COME AGAIN                                                "));
 
 
                 // Close the document after adding all content
@@ -714,125 +706,10 @@ namespace PointOfSale.Cashier
                 // Handle any exceptions that occur during PDF generation
                 MessageBox.Show("Error generating invoice PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }*/
-
-   private void GenerateInvoicePdf()
-        {
-            // Create the PDF document object (PageSize.A4 is commonly used)
-            iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A5);
-
-            try
-            {
-                // Get the Desktop path where you want to save the PDF
-                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string filePath = Path.Combine(desktopPath, "Invoice_" + lbl_bill.Text + ".pdf");
-
-                // Create PdfWriter instance to write the PDF file
-                iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
-
-                // Open the document for writing
-                doc.Open();
-
-                // Add Title (Invoice heading)
-                doc.Add(new iTextSharp.text.Paragraph("                                              INVOICE  "));
-                doc.Add(new iTextSharp.text.Paragraph("---------------------------------------------------------------------------------------"));
-                doc.Add(new iTextSharp.text.Paragraph("Bill No: " + lbl_bill.Text));
-
-
-                // Add Bill Number, Date, and Time
-                doc.Add(new iTextSharp.text.Paragraph("Cashier: " + lbl_user.Text));
-                doc.Add(new iTextSharp.text.Paragraph("Date: " + lbl_date.Text));
-                doc.Add(new iTextSharp.text.Paragraph("Time: " + lbl_time.Text));
-                doc.Add(new iTextSharp.text.Paragraph("             "));
-                doc.Add(new iTextSharp.text.Paragraph("             "));
-                // Create a table to list the purchased items (5 columns)
-                PdfPTable table = new PdfPTable(5);  // 5 columns: No, Product Code, Product Name, Qty, Amount
-
-                // Set column widths to customize the layout
-                table.SetWidths(new float[] { 1f, 2f, 4f, 2f, 1f });  // Set width for each column (adjust as needed)
-
-                // Add Table headers
-                table.AddCell(new PdfPCell(new Phrase("No")) { Border = PdfPCell.NO_BORDER });
-                table.AddCell(new PdfPCell(new Phrase("Product Code")) { Border = PdfPCell.NO_BORDER });
-                table.AddCell(new PdfPCell(new Phrase("Product Name")) { Border = PdfPCell.NO_BORDER });
-                table.AddCell(new PdfPCell(new Phrase("Quantity")) { Border = PdfPCell.NO_BORDER });
-                table.AddCell(new PdfPCell(new Phrase("Amount")) { Border = PdfPCell.NO_BORDER });
- 
-                // Loop through each row in the DGV_List2 (purchase items) and add them to the table
-                int rowNo = 1;
-                foreach (DataGridViewRow row in DGV_List2.Rows)
-                {
-                    if (row.IsNewRow) continue;
-
-                    // Add the item details (No, Code, Name, Qty, Amount)
-                    table.AddCell(new PdfPCell(new Phrase(rowNo.ToString())) { Border = PdfPCell.NO_BORDER });
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["Code"].Value.ToString())) { Border = PdfPCell.NO_BORDER });
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["Product"].Value.ToString())) { Border = PdfPCell.NO_BORDER });
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["Qty"].Value.ToString())) { Border = PdfPCell.NO_BORDER });
-
-                    // For Amount, we set the alignment to right
-                    table.AddCell(new PdfPCell(new Phrase(row.Cells["Amount"].Value.ToString()))
-                    {
-                        Border = PdfPCell.NO_BORDER,
-                        HorizontalAlignment = Element.ALIGN_RIGHT  // Right-align the amount
-                    });
-
-                     rowNo++;
-                }
-
-                // Add the table to the document
-                doc.Add(table);
-
-                // Add Total, Discount, Net values
-                doc.Add(new iTextSharp.text.Paragraph("---------------------------------------------------------------------------------------"));
-                doc.Add(new iTextSharp.text.Paragraph("Total:            " + txt_total.Text));
-                if (string.IsNullOrWhiteSpace(txt_discount.Text))
-                {
-                    doc.Add(new iTextSharp.text.Paragraph("Discount:         0.00 "));
-                }
-                else
-                {
-                    doc.Add(new iTextSharp.text.Paragraph("Discount:         " + txt_discount.Text));
-                }
-                doc.Add(new iTextSharp.text.Paragraph("Net:              " + txt_net.Text));
-                doc.Add(new iTextSharp.text.Paragraph("---------------------------------------------------------------------------------------"));
-
-                // Add Cash and Balance information
-                decimal cash = decimal.Parse(txt_cash.Text);
-
-                // Format the decimal to two decimal places
-                string formattedCash = cash.ToString("F2"); // "F2" ensures two decimal places
-
-                // Add the formatted value to the document
-                doc.Add(new iTextSharp.text.Paragraph("Cash:          " + formattedCash));
-
-                doc.Add(new iTextSharp.text.Paragraph("Balance:       " + txt_balance.Text));
-                doc.Add(new iTextSharp.text.Paragraph(" "));
-                doc.Add(new iTextSharp.text.Paragraph("                               THANK YOU! COME AGAIN  "));
-
-                // Close the document after adding all content
-                doc.Close();
-
-                // Notify the user
-                MessageBox.Show("Invoice PDF is generated on Desktop!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that occur during PDF generation
-                MessageBox.Show("Error generating invoice PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-         }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            Form1 login = new Form1();
-            login.Show();
         }
+
     }
 }
-    
 
     
 

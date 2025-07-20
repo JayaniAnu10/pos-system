@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PointOfSale
+namespace pos_system.stock
 {
-    public partial class Form1 : Form
+    public partial class ProductView : Form
     {
-        public Form1()
+        public ProductView()
         {
             InitializeComponent();
+
         }
     }
 }
