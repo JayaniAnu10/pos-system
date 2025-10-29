@@ -459,7 +459,14 @@ namespace PointOfSale.Employee
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            // Hide the current form (dashboard)
+            this.Hide();
+
+            // Create a new instance of the login form
+            Form1 loginForm = new Form1();
+
+            // Show the login form again
+            loginForm.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

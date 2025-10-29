@@ -261,7 +261,14 @@ namespace PointOfSale.Report
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Application.Exit(); // close entire app
+            // Hide the current form (dashboard)
+            this.Hide();
+
+            // Create a new instance of the login form
+            Form1 loginForm = new Form1();
+
+            // Show the login form again
+            loginForm.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -269,6 +276,11 @@ namespace PointOfSale.Report
             report reportForm = new report();
             reportForm.Show();
             this.Hide(); // hide current form
+        }
+
+        private void chartEmpSales_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

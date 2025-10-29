@@ -830,6 +830,18 @@ namespace PointOfSale.Cashier
             Form1 login = new Form1();
             login.Show();
         }
+
+        private void button10_Click_1(object sender, EventArgs e)
+        {
+            // Hide the current form (dashboard)
+            this.Hide();
+
+            // Create a new instance of the login form
+            Form1 loginForm = new Form1();
+
+            // Show the login form again
+            loginForm.Show();
+        }
     }
 }
     

@@ -40,16 +40,17 @@ namespace PointOfSale.Production
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
+                dataGridView1.Columns.Clear(); // ✅ Clear all columns first
                 dataGridView1.DataSource = dt;
                 dataGridView1.AutoGenerateColumns = true;
                 dataGridView1.ReadOnly = true;
                 dataGridView1.AllowUserToAddRows = false;
 
-                // Add buttons only once
-                if (!dataGridView1.Columns.Contains("DeleteButton"))
-                    AddActionButtons();
+                AddActionButtons(); // ✅ Always re-add buttons cleanly
+                dataGridView1.Refresh();
             }
         }
+
 
         private void SearchProduct(string keyword)
         {
@@ -119,9 +120,34 @@ namespace PointOfSale.Production
             {
                 cmd.Parameters.AddWithValue("@ProductId", productId);
                 con.Open();
-                cmd.ExecuteNonQuery();
+
+                try
+                {
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected == 0)
+                    {
+                        MessageBox.Show("Product not found. It may have already been deleted.",
+                                        "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    // Handle foreign key constraint violations gracefully
+                    if (ex.Number == 547) // 547 = foreign key constraint violation
+                    {
+                        MessageBox.Show("This product cannot be deleted because it is referenced in another table (e.g., sales or stock records).",
+                                        "Delete Blocked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error deleting product: " + ex.Message,
+                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
+
 
 
 
@@ -146,8 +172,11 @@ namespace PointOfSale.Production
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
-            DataGridViewColumn column = dataGridView1.Columns[e.ColumnIndex];
-            string productId = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString(); // Column 0 = ProductId
+            var column = dataGridView1.Columns[e.ColumnIndex];
+            var row = dataGridView1.Rows[e.RowIndex];
+
+            // ✅ Use column name instead of assuming index 0
+            string productId = row.Cells["ProductId"].Value.ToString();
 
             if (column.Name == "DeleteButton")
             {
@@ -163,7 +192,7 @@ namespace PointOfSale.Production
                     {
                         DeleteProduct(productId);
                         MessageBox.Show("Product deleted successfully.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadProductData(); // Refresh the DataGridView
+                        LoadProductData();
                     }
                     catch (Exception ex)
                     {
@@ -175,9 +204,9 @@ namespace PointOfSale.Production
             {
                 try
                 {
-                    Update_product updateForm = new Update_product(productId); // Ensure this constructor exists in your Update_product form
-                    updateForm.ShowDialog(); // Open as a modal dialog
-                    LoadProductData(); // Refresh data after possible update
+                    Update_product updateForm = new Update_product(productId);
+                    updateForm.ShowDialog();
+                    LoadProductData();
                 }
                 catch (Exception ex)
                 {
@@ -188,16 +217,16 @@ namespace PointOfSale.Production
             {
                 try
                 {
-                    ProductView displayForm = new ProductView(productId); // Make sure constructor accepts productId
-                    displayForm.ShowDialog(); // Open the form as a modal dialog
+                    ProductView displayForm = new ProductView(productId);
+                    displayForm.ShowDialog();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error displaying product: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
+
         private void btnAddButton_Click(object sender, EventArgs e)
         {
             // Create an instance of your Add Product form
@@ -258,6 +287,18 @@ namespace PointOfSale.Production
         private void panel5_Paint(object sender, PaintEventArgs e)
         {
             
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Hide the current form (dashboard)
+            this.Hide();
+
+            // Create a new instance of the login form
+            Form1 loginForm = new Form1();
+
+            // Show the login form again
+            loginForm.Show();
         }
     }
 }

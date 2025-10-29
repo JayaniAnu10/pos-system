@@ -61,7 +61,10 @@ namespace PointOfSale.Production
 
         }
 
-        
+        private void ProductView_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

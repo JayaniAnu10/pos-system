@@ -40,7 +40,6 @@
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.txtCostPrice = new System.Windows.Forms.TextBox();
-            this.txtStatus = new System.Windows.Forms.TextBox();
             this.txtSellingPrice = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtProductId = new System.Windows.Forms.TextBox();
@@ -52,9 +51,9 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(106)))), ((int)(((byte)(79)))));
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(-7, 0);
+            this.panel1.Location = new System.Drawing.Point(-7, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(700, 68);
+            this.panel1.Size = new System.Drawing.Size(748, 72);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -80,13 +79,12 @@
             this.panel2.Controls.Add(this.txtQuantity);
             this.panel2.Controls.Add(this.txtProductName);
             this.panel2.Controls.Add(this.txtCostPrice);
-            this.panel2.Controls.Add(this.txtStatus);
             this.panel2.Controls.Add(this.txtSellingPrice);
             this.panel2.Controls.Add(this.txtDescription);
             this.panel2.Controls.Add(this.txtProductId);
             this.panel2.Location = new System.Drawing.Point(-7, 74);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(700, 800);
+            this.panel2.Size = new System.Drawing.Size(748, 800);
             this.panel2.TabIndex = 1;
             // 
             // label7
@@ -158,89 +156,79 @@
             // txtQuantity
             // 
             this.txtQuantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
-            this.txtQuantity.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtQuantity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
             this.txtQuantity.Location = new System.Drawing.Point(252, 232);
             this.txtQuantity.Multiline = true;
             this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(404, 36);
+            this.txtQuantity.Size = new System.Drawing.Size(475, 36);
             this.txtQuantity.TabIndex = 6;
             // 
             // txtProductName
             // 
             this.txtProductName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
-            this.txtProductName.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProductName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
             this.txtProductName.Location = new System.Drawing.Point(252, 135);
             this.txtProductName.Multiline = true;
             this.txtProductName.Name = "txtProductName";
-            this.txtProductName.Size = new System.Drawing.Size(404, 55);
+            this.txtProductName.Size = new System.Drawing.Size(475, 40);
             this.txtProductName.TabIndex = 5;
             // 
             // txtCostPrice
             // 
             this.txtCostPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
-            this.txtCostPrice.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCostPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCostPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
             this.txtCostPrice.Location = new System.Drawing.Point(252, 312);
             this.txtCostPrice.Multiline = true;
             this.txtCostPrice.Name = "txtCostPrice";
-            this.txtCostPrice.Size = new System.Drawing.Size(404, 36);
+            this.txtCostPrice.Size = new System.Drawing.Size(475, 36);
             this.txtCostPrice.TabIndex = 4;
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
-            this.txtStatus.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
-            this.txtStatus.Location = new System.Drawing.Point(450, 608);
-            this.txtStatus.Multiline = true;
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(207, 35);
-            this.txtStatus.TabIndex = 3;
             // 
             // txtSellingPrice
             // 
             this.txtSellingPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
-            this.txtSellingPrice.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSellingPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSellingPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
-            this.txtSellingPrice.Location = new System.Drawing.Point(252, 395);
+            this.txtSellingPrice.Location = new System.Drawing.Point(252, 398);
             this.txtSellingPrice.Multiline = true;
             this.txtSellingPrice.Name = "txtSellingPrice";
-            this.txtSellingPrice.Size = new System.Drawing.Size(404, 36);
+            this.txtSellingPrice.Size = new System.Drawing.Size(475, 36);
             this.txtSellingPrice.TabIndex = 2;
             // 
             // txtDescription
             // 
             this.txtDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
-            this.txtDescription.Font = new System.Drawing.Font("Arial Narrow", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescription.Location = new System.Drawing.Point(46, 544);
+            this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtDescription.Location = new System.Drawing.Point(253, 500);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(357, 131);
+            this.txtDescription.Size = new System.Drawing.Size(474, 131);
             this.txtDescription.TabIndex = 1;
             // 
             // txtProductId
             // 
             this.txtProductId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(243)))), ((int)(((byte)(220)))));
-            this.txtProductId.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProductId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProductId.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(28)))), ((int)(((byte)(21)))));
-            this.txtProductId.Location = new System.Drawing.Point(252, 55);
+            this.txtProductId.Location = new System.Drawing.Point(253, 49);
             this.txtProductId.Multiline = true;
             this.txtProductId.Name = "txtProductId";
-            this.txtProductId.Size = new System.Drawing.Size(404, 37);
+            this.txtProductId.Size = new System.Drawing.Size(474, 37);
             this.txtProductId.TabIndex = 0;
             // 
             // ProductView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 864);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(742, 772);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.MaximizeBox = false;
             this.Name = "ProductView";
             this.Text = "Product view";
+            this.Load += new System.EventHandler(this.ProductView_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -257,7 +245,6 @@
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.TextBox txtCostPrice;
-        private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.TextBox txtSellingPrice;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.TextBox txtProductId;
